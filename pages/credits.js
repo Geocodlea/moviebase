@@ -1,4 +1,4 @@
-import { Center, Text, Image, Flex, Heading } from "@chakra-ui/react";
+import { Center, Image, Flex, Heading } from "@chakra-ui/react";
 import Layout from "components/Layout";
 
 export default function Credits() {
@@ -10,7 +10,12 @@ export default function Credits() {
             This website uses the TMDB API but is not endorsed or certified by
             TMDB
           </Heading>
-          <Image mt="100" src="images/logoTMDB.svg" width={100} />
+          <Image
+            mt="100"
+            src="images/logoTMDB.svg"
+            width={100}
+            alt="TMDB logo"
+          />
         </Flex>
       </Center>
     </Layout>

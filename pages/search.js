@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import useSWR from 'swr';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import useSWR from "swr";
 import {
   Input,
   IconButton,
@@ -15,34 +15,30 @@ import {
   VStack,
   Button,
   Badge,
-} from '@chakra-ui/react';
-import { SearchIcon } from '@chakra-ui/icons';
-import Layout from 'components/Layout';
+} from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import Layout from "components/Layout";
 
 function SearchBar() {
   const router = useRouter();
-  const { terms } = router.query;
-  const [text, setText] = useState('');
-
-  // Update text input when route changes (ex when user goes back/forward)
-  useEffect(() => {
-    setText(terms || '');
-  }, [terms]);
+  const [text, setText] = useState("");
 
   // Update router history if a search was performed
+  useEffect(() => {
+    router.push(`/search/?terms=${text}`, undefined, { shallow: true });
+  }, [text]);
+
+  // Update text input when route changes (ex when user goes back/forward)
   const handleSearch = (event) => {
-    event.preventDefault();
-    if (text !== terms) {
-      router.push(`/search/?terms=${text}`, undefined, { shallow: true });
-    }
+    setText(event.target.value);
   };
 
   return (
-    <InputGroup as="form" onSubmit={handleSearch}>
+    <InputGroup as="form">
       <Input
         placeholder="Search for a movie..."
         value={text}
-        onChange={(event) => setText(event.target.value)}
+        onChange={handleSearch}
       />
       <InputRightElement>
         <IconButton
@@ -56,6 +52,7 @@ function SearchBar() {
 }
 function SearchResults() {
   const { terms } = useRouter().query;
+
   const { data, error } = useSWR(terms && `/api/search?terms=${terms}`);
 
   if (!terms) {

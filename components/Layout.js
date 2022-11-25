@@ -38,7 +38,7 @@ function Header() {
           <HStack justify="space-between">
             <MenuItem href="/" mr={8}>
               <Heading size="lg">
-                <img src="images/logo.svg" width="60" />
+                <img src="/images/logo.svg" width="60" />
               </Heading>
             </MenuItem>
 
@@ -57,20 +57,16 @@ function Header() {
             spacing={4}
           >
             <MenuItem href="/search">Search</MenuItem>
-            <MenuItem href="/" disabled>
-              Watchlist
-            </MenuItem>
-            <MenuItem href="/" disabled>
-              History
-            </MenuItem>
+            <MenuItem href="/watchlist">Watchlist</MenuItem>
+            <MenuItem href="/history">History</MenuItem>
             <MenuItem href="/credits">Credits</MenuItem>
           </Stack>
 
           <Spacer />
 
           <Box display={[isOpen ? "block" : "none", , "block"]}>
-            <MenuItem href="/" variant="outline" disabled>
-              What to watch
+            <MenuItem href="/recommendations" variant="outline">
+              Recommendations
             </MenuItem>
           </Box>
         </Stack>
