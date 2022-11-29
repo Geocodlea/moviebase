@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router';
-import Image from 'next/image';
-import Head from 'next/head';
-import useSWR from 'swr';
-import { buildImageUrl } from 'utils/api';
+import { useRouter } from "next/router";
+import Image from "next/image";
+import Head from "next/head";
+import useSWR from "swr";
+import { buildImageUrl } from "utils/api";
 import {
   Badge,
   Box,
@@ -14,9 +14,10 @@ import {
   Stack,
   Tag,
   Text,
-} from '@chakra-ui/react';
-import Layout from 'components/Layout';
-import HistoryButton from 'components/HistoryButton';
+} from "@chakra-ui/react";
+import Layout from "components/Layout";
+import HistoryButton from "components/HistoryButton";
+import WatchlistButton from "components/WatchlistButton";
 
 const MovieContent = () => {
   const { id } = useRouter().query;
@@ -40,7 +41,7 @@ const MovieContent = () => {
     return <Text color="red">{data.status_message}</Text>;
   }
   return (
-    <Stack direction={['column', 'row']} spacing={4}>
+    <Stack direction={["column", "row"]} spacing={4}>
       <Head>
         <title>{data.title}</title>
       </Head>
@@ -49,13 +50,14 @@ const MovieContent = () => {
           <HistoryButton />
         </HStack>
         <Image
-          src={buildImageUrl(data.poster_path, 'w300')}
+          src={buildImageUrl(data.poster_path, "w300")}
           alt="Movie poster"
           layout="responsive"
           width="300"
           height="450"
           objectFit="contain"
           unoptimized
+          priority
         />
       </Box>
       <Stack>
@@ -68,7 +70,6 @@ const MovieContent = () => {
           </Box>
         </HStack>
         <Box>{data.tagline}</Box>
-
         <Stack direction="row">
           {data.genres?.map((genre) => (
             <Badge key={genre.id} colorScheme="purple" variant="outline">
@@ -77,6 +78,9 @@ const MovieContent = () => {
           ))}
         </Stack>
         <Box>{data.overview}</Box>
+        <Box>
+          <WatchlistButton />
+        </Box>
       </Stack>
     </Stack>
   );

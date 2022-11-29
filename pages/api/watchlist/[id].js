@@ -1,5 +1,4 @@
 import { fetcher } from "utils/api";
-import History from "models/History";
 import Watchlist from "models/Watchlist";
 import dbConnect from "utils/dbConnect";
 
@@ -13,9 +12,9 @@ export default async function handler(req, res) {
   const { id } = req.query;
 
   if (method === "GET") {
-    const history = await History.findOne({ id });
+    const watchlist = await Watchlist.findOne({ id });
 
-    if (history) {
+    if (watchlist) {
       res.status(200).json({ found: true });
     } else {
       res.status(404).json({ found: false });
@@ -23,30 +22,12 @@ export default async function handler(req, res) {
   } else if (method === "POST") {
     const movie = await fetcher(getMovieUrl(id));
 
-    const history = new History({ id, title: movie.title });
-    await history.save();
-    await Watchlist.deleteOne({ id });
-
-    res.status(200).json({ found: true });
-  } else if (method === "PUT") {
-    const data = JSON.parse(req.body);
-    const result = {};
-
-    if (data.date) {
-      result.date = data.date;
-    }
-    if (data.location) {
-      result.location = data.location;
-    }
-    if (data.rating) {
-      result.rating = data.rating;
-    }
-
-    await History.updateOne({ id }, result);
+    const watchlist = new Watchlist({ id, title: movie.title });
+    await watchlist.save();
 
     res.status(200).json({ found: true });
   } else if (method === "DELETE") {
-    await History.deleteOne({ id });
+    await Watchlist.deleteOne({ id });
 
     res.status(200).json({ found: false });
   }
