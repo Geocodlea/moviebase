@@ -5,19 +5,23 @@ import useSWR from "swr";
 import {
   Input,
   IconButton,
-  Container,
-  UnorderedList,
-  ListItem,
   Progress,
   Text,
   InputGroup,
   InputRightElement,
-  VStack,
-  Button,
-  Badge,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+  Center,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import Layout from "components/Layout";
+import dateFormat from "utils/dateFormat";
+import Header from "components/Header";
 
 function SearchBar() {
   const router = useRouter();
@@ -56,7 +60,7 @@ function SearchResults() {
   const { data, error } = useSWR(terms && `/api/search?terms=${terms}`);
 
   if (!terms) {
-    return <Text>Type some terms and submit for a quick search</Text>;
+    return <Text>Type some terms for a quick search</Text>;
   }
   if (error) {
     return (
@@ -66,39 +70,51 @@ function SearchResults() {
     );
   }
   if (!data) {
-    return <Progress size="xs" isIndeterminate />;
+    return <Progress size="lg" isIndeterminate />;
   }
   if (!data.results.length) {
     return <Text>No results</Text>;
   }
   return (
-    <UnorderedList stylePosition="inside">
-      {data.results.map(({ id, title, release_date }) => (
-        <ListItem key={id}>
-          <Link href={`/movies/${id}`} passHref legacyBehavior>
-            <Button
-              as="a"
-              variant="link"
-              rightIcon={<Badge>{release_date}</Badge>}
-            >
-              <Text as="span">{title} </Text>
-            </Button>
-          </Link>
-        </ListItem>
-      ))}
-    </UnorderedList>
+    <Center>
+      <TableContainer w="90%">
+        <Table variant="striped" colorScheme="blue">
+          <Thead>
+            <Tr>
+              <Th>No.</Th>
+              <Th>Title</Th>
+              <Th>Release Date</Th>
+              <Th>Rating</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {data.results.map(
+              ({ id, title, release_date, vote_average }, index) => (
+                <Tr key={id}>
+                  <Td textAlign="center">{index + 1}</Td>
+                  <Td>
+                    <Link href={`/movies/${id}`} passHref legacyBehavior>
+                      <Text as="a">{title}</Text>
+                    </Link>
+                  </Td>
+                  <Td>{dateFormat(release_date)}</Td>
+                  <Td>{vote_average}</Td>
+                </Tr>
+              )
+            )}
+          </Tbody>
+        </Table>
+      </TableContainer>
+    </Center>
   );
 }
 
 export default function Search() {
   return (
     <Layout title="Search">
-      <Container>
-        <VStack spacing={4} align="stretch">
-          <SearchBar />
-          <SearchResults />
-        </VStack>
-      </Container>
+      <Header title="Search" />
+      <SearchBar />
+      <SearchResults />
     </Layout>
   );
 }

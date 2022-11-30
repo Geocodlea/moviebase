@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import useSWR from "swr";
 import dateFormat from "utils/dateFormat";
+import Header from "components/Header";
 
 export default function Watchlist() {
   const { data, error } = useSWR(`/api/watchlist`);
@@ -25,19 +26,15 @@ export default function Watchlist() {
     );
   }
   if (!data) {
-    return <Progress size="xs" isIndeterminate />;
+    return <Progress size="lg" isIndeterminate />;
   }
 
   return (
     <Layout title="Watchlist">
-      <Center>
-        <Heading as="h1" size="2xl" mb={5}>
-          Watchlist
-        </Heading>
-      </Center>
+      <Header title="Watchlist" />
       <Center>
         {data.length > 0 && (
-          <TableContainer>
+          <TableContainer w="90%">
             <Table variant="striped" colorScheme="blue">
               <Thead>
                 <Tr>

@@ -1,9 +1,11 @@
 import { Center, Image, Flex, Heading } from "@chakra-ui/react";
 import Layout from "components/Layout";
+import Header from "components/Header";
 
 export default function Credits() {
   return (
     <Layout title="Credits">
+      <Header title="Credits" />
       <Center h="full">
         <Flex p="5" direction="column" align="end">
           <Heading as="h2" p="10">

@@ -10,9 +10,7 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
-import useSWR from "swr";
-import dateFormat from "utils/dateFormat";
-import { useSWRConfig } from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import { fetcher } from "utils/api";
 
 export default function HistoryForm() {
@@ -21,7 +19,7 @@ export default function HistoryForm() {
 
   return (
     <Flex align="center" justify="center" direction="column">
-      <Text mt={10} ml={10} mr={10}>
+      <Text mt={10} ml={10} mr={10} fontSize="xl">
         You have the option to edit the date, add the location or add your
         personal rating for the selected movie.
       </Text>

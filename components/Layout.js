@@ -26,7 +26,7 @@ function Header() {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box bg="purple.500">
+    <Box bg="blue.700">
       <Container>
         <Stack
           as="nav"
