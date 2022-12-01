@@ -15,7 +15,7 @@ export default function WatchlistButton() {
         mr={5}
         isLoading={!data}
         loadingText="Loading"
-        colorScheme={data?.found ? "purple" : "gray"}
+        colorScheme={data?.found ? "blue" : "gray"}
         size="sm"
         onClick={() => {
           mutate(`/api/watchlist/${id}`, () =>

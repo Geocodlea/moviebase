@@ -14,6 +14,15 @@ import {
   Stack,
   Tag,
   Text,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
 } from "@chakra-ui/react";
 import Layout from "components/Layout";
 import HistoryButton from "components/HistoryButton";
@@ -64,7 +73,7 @@ const MovieContent = () => {
         <HStack justify="space-between">
           <Heading as="h2">{data.title}</Heading>
           <Box>
-            <Tag colorScheme="purple" variant="solid">
+            <Tag colorScheme="blue" variant="solid">
               {data.release_date}
             </Tag>
           </Box>
@@ -72,12 +81,31 @@ const MovieContent = () => {
         <Box>{data.tagline}</Box>
         <Stack direction="row">
           {data.genres?.map((genre) => (
-            <Badge key={genre.id} colorScheme="purple" variant="outline">
+            <Badge key={genre.id} colorScheme="blue" variant="outline">
               {genre.name}
             </Badge>
           ))}
         </Stack>
         <Box>{data.overview}</Box>
+        <Box></Box>
+        <TableContainer>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Rating</Th>
+                <Th>Votes</Th>
+                <Th>Budget</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+                <Td>{data.vote_average}</Td>
+                <Td>{data.vote_count}</Td>
+                <Td>{data.budget} $</Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
         <Box>
           <WatchlistButton />
         </Box>

@@ -29,8 +29,6 @@ export default function Recommendations() {
     return <Progress size="lg" isIndeterminate />;
   }
 
-  console.log(data.randomMovie?.title);
-
   return (
     <Layout title="Recommendations">
       <Header title="Recommendations" />
@@ -39,18 +37,12 @@ export default function Recommendations() {
       </Text>
       <Text m={5} align="center" fontSize="xl">
         Recommended movies based on
-        <Badge
-          ml={3}
-          mr={3}
-          variant="outline"
-          colorScheme="blue"
-          fontSize="1rem"
-        >
+        <Badge ml={3} mr={3} variant="solid" colorScheme="blue" fontSize="1rem">
           {data.randomMovie?.title}
         </Badge>
       </Text>
       <Center>
-        {data.recommendedMovie.results?.length ? (
+        {data.recommendedMovie.results?.length > 0 && (
           <TableContainer w="90%">
             <Table variant="striped" colorScheme="blue">
               <Thead>
@@ -79,21 +71,11 @@ export default function Recommendations() {
               </Tbody>
             </Table>
           </TableContainer>
-        ) : (
-          <Text m={5} align="center" fontSize="xl">
-            There are no recommendations based on this movie.
-          </Text>
         )}
       </Center>
       <Text m={5} mt={50} align="center" fontSize="xl">
         Similar movies based on
-        <Badge
-          ml={3}
-          mr={3}
-          variant="outline"
-          colorScheme="blue"
-          fontSize="1rem"
-        >
+        <Badge ml={3} mr={3} variant="solid" colorScheme="blue" fontSize="1rem">
           {data.randomMovie?.title}
         </Badge>
       </Text>
