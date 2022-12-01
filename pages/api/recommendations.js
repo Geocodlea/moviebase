@@ -23,9 +23,9 @@ export default async function handler(req, res) {
       Math.floor(Math.random() * recommendationsMovies.length)
     ];
   const recommendedMovie = await fetcher(
-    getRecommendedMovieUrl(randomMovie.id)
+    getRecommendedMovieUrl(randomMovie?.id)
   );
-  const similarMovie = await fetcher(getSimilarMovieUrl(randomMovie.id));
+  const similarMovie = await fetcher(getSimilarMovieUrl(randomMovie?.id));
 
   res.status(200).json({ recommendedMovie, similarMovie, randomMovie });
 }

@@ -29,7 +29,7 @@ export default function Recommendations() {
     return <Progress size="lg" isIndeterminate />;
   }
 
-  console.log(data.randomMovie.title);
+  console.log(data.randomMovie?.title);
 
   return (
     <Layout title="Recommendations">
@@ -46,11 +46,11 @@ export default function Recommendations() {
           colorScheme="blue"
           fontSize="1rem"
         >
-          {data.randomMovie.title}
+          {data.randomMovie?.title}
         </Badge>
       </Text>
       <Center>
-        {data.recommendedMovie.results.length ? (
+        {data.recommendedMovie.results?.length ? (
           <TableContainer w="90%">
             <Table variant="striped" colorScheme="blue">
               <Thead>
@@ -81,8 +81,7 @@ export default function Recommendations() {
           </TableContainer>
         ) : (
           <Text m={5} align="center" fontSize="xl">
-            There are no recommendations based on this movie, refresh for
-            another one.
+            There are no recommendations based on this movie.
           </Text>
         )}
       </Center>
@@ -95,11 +94,11 @@ export default function Recommendations() {
           colorScheme="blue"
           fontSize="1rem"
         >
-          {data.randomMovie.title}
+          {data.randomMovie?.title}
         </Badge>
       </Text>
       <Center>
-        {data.similarMovie.results.length && (
+        {data.similarMovie.results?.length && (
           <TableContainer w="90%">
             <Table variant="striped" colorScheme="blue">
               <Thead>
@@ -114,14 +113,14 @@ export default function Recommendations() {
                 {data.similarMovie.results.map(
                   ({ id, title, release_date, vote_average }, index) => (
                     <Tr key={id}>
-                      <Td textAlign="center">{index + 1}</Td>
+                      <Td>{index + 1}</Td>
                       <Td>
                         <Link href={`/movies/${id}`} passHref legacyBehavior>
                           <Text as="a">{title}</Text>
                         </Link>
                       </Td>
                       <Td>{dateFormat(release_date)}</Td>
-                      <Td>{vote_average}</Td>
+                      <Td>{vote_average.toFixed(1)}</Td>
                     </Tr>
                   )
                 )}

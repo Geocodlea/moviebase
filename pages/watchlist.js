@@ -2,7 +2,6 @@ import Layout from "components/Layout";
 import {
   Center,
   Text,
-  Heading,
   Progress,
   Table,
   Thead,
@@ -46,7 +45,7 @@ export default function Watchlist() {
               <Tbody>
                 {data.map(({ id, title, date }, index) => (
                   <Tr key={id}>
-                    <Td textAlign="center">{index + 1}</Td>
+                    <Td>{index + 1}</Td>
                     <Td>
                       <Link href={`/movies/${id}`} passHref legacyBehavior>
                         <Text as="a">{title}</Text>

@@ -2,7 +2,6 @@ import Layout from "components/Layout";
 import {
   Center,
   Text,
-  Heading,
   Progress,
   Table,
   Thead,
@@ -49,7 +48,7 @@ export default function History() {
               <Tbody>
                 {data.map(({ id, title, date, location, rating }, index) => (
                   <Tr key={id}>
-                    <Td textAlign="center">{index + 1}</Td>
+                    <Td>{index + 1}</Td>
                     <Td>
                       <Link href={`/movies/${id}`} passHref legacyBehavior>
                         <Text as="a">{title}</Text>
@@ -57,7 +56,7 @@ export default function History() {
                     </Td>
                     <Td>{dateFormat(date)}</Td>
                     <Td>{location}</Td>
-                    <Td>{rating}</Td>
+                    <Td>{rating?.toFixed(1)}</Td>
                   </Tr>
                 ))}
               </Tbody>
