@@ -11,7 +11,7 @@ export default function Home() {
       <Heading as="h2" align="center" mb={3}>
         Search
       </Heading>
-      <SearchBar route="/" />
+      <SearchBar route="" />
       <SearchResults results="5" />
       <Homepage data="watchlist" />
       <Homepage data="history" />

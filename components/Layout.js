@@ -12,8 +12,9 @@ import {
   VStack,
   Grid,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 const MenuItem = ({ href, children, ...props }) => (
   <Link href={href} passHref legacyBehavior>
@@ -25,6 +26,8 @@ const MenuItem = ({ href, children, ...props }) => (
 
 function Header() {
   const { isOpen, onToggle } = useDisclosure();
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Box bg="blue.700">
@@ -66,6 +69,12 @@ function Header() {
           </Stack>
 
           <Spacer />
+
+          <Box display={[isOpen ? "block" : "none", , "block"]}>
+            <Button onClick={toggleColorMode}>
+              {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+            </Button>
+          </Box>
 
           <Box display={[isOpen ? "block" : "none", , "block"]}>
             <MenuItem href="/recommendations" variant="outline">
