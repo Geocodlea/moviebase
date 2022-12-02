@@ -11,6 +11,7 @@ import {
   Spacer,
   VStack,
   Grid,
+  Text,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
@@ -56,9 +57,11 @@ function Header() {
             display={[isOpen ? "flex" : "none", , "flex"]}
             spacing={4}
           >
+            <MenuItem href="/">Home</MenuItem>
             <MenuItem href="/search">Search</MenuItem>
             <MenuItem href="/watchlist">Watchlist</MenuItem>
             <MenuItem href="/history">History</MenuItem>
+            <MenuItem href="/toprated">Top Rated</MenuItem>
             <MenuItem href="/credits">Credits</MenuItem>
           </Stack>
 
@@ -88,6 +91,9 @@ export default function Layout({ title, children }) {
           <Box as="main" h="full">
             {children}
           </Box>
+          <Text fontSize="lg" align="end" p={3}>
+            &#169; Created by George Anton
+          </Text>
         </VStack>
       </Grid>
     </>
