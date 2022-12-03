@@ -50,7 +50,7 @@ export default function Homepage(props) {
                   borderRadius="lg"
                   m="auto"
                   w="100%"
-                  h="20rem"
+                  h={[64, 60, 56, 64, 96]}
                 />
                 <Stack mt="6" spacing="3">
                   <Heading size="md">{title}</Heading>

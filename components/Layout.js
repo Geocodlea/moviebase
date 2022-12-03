@@ -129,7 +129,7 @@ export default function Layout({ selected, title, children }) {
               <Link href="https://www.themoviedb.org/" isExternal>
                 <Image
                   display="inline"
-                  src="images/logoTMDB.svg"
+                  src="/images/logoTMDB.svg"
                   width={8}
                   alt="TMDB logo"
                 />
