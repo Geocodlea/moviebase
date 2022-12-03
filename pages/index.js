@@ -6,7 +6,7 @@ import { SearchBar, SearchResults } from "components/Search";
 
 export default function Home() {
   return (
-    <Layout title="Moviebase">
+    <Layout title="Moviebase" selected="/">
       <Header title="Moviebase" />
       <Heading as="h2" align="center" mb={3}>
         Search

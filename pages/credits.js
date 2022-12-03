@@ -4,7 +4,7 @@ import Header from "components/Header";
 
 export default function Credits() {
   return (
-    <Layout title="Credits">
+    <Layout title="Credits" selected="/credits">
       <Header title="Credits" />
       <VStack>
         <Heading as="h2" p="10" align="center">

@@ -30,7 +30,7 @@ export default function Recommendations() {
   }
 
   return (
-    <Layout title="Recommendations">
+    <Layout title="Recommendations" selected="/recommendations">
       <Header title="Recommendations" />
       <Text m={5} align="center" fontSize="xl">
         Recommendations from your Watchlist and History Movies

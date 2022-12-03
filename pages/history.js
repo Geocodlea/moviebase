@@ -30,7 +30,7 @@ export default function History() {
   }
 
   return (
-    <Layout title="History">
+    <Layout title="History" selected="/history">
       <Header title="History" />
       <Center>
         {data.length > 0 && (

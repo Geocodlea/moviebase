@@ -13,24 +13,34 @@ import {
   Grid,
   Text,
   useColorMode,
+  DarkMode,
+  Flex,
+  Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
-const MenuItem = ({ href, children, ...props }) => (
-  <Link href={href} passHref legacyBehavior>
-    <Button as="a" variant="link" {...props}>
-      {children}
-    </Button>
-  </Link>
+const MenuItem = ({ selected, href, children, ...props }) => (
+  <DarkMode>
+    <Link href={href} passHref legacyBehavior>
+      <Button
+        color={selected === href ? "gray" : "white"}
+        as="a"
+        variant="link"
+        {...props}
+      >
+        {children}
+      </Button>
+    </Link>
+  </DarkMode>
 );
 
-function Header() {
+function Header({ selected }) {
   const { isOpen, onToggle } = useDisclosure();
 
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Box bg="blue.700">
+    <Box bgGradient="linear(to-t, blue.600, blue.800)">
       <Container>
         <Stack
           as="nav"
@@ -60,12 +70,21 @@ function Header() {
             display={[isOpen ? "flex" : "none", , "flex"]}
             spacing={4}
           >
-            <MenuItem href="/">Home</MenuItem>
-            <MenuItem href="/search">Search</MenuItem>
-            <MenuItem href="/watchlist">Watchlist</MenuItem>
-            <MenuItem href="/history">History</MenuItem>
-            <MenuItem href="/toprated">Top Rated</MenuItem>
-            <MenuItem href="/credits">Credits</MenuItem>
+            <MenuItem selected={selected} href="/">
+              Home
+            </MenuItem>
+            <MenuItem selected={selected} href="/search">
+              Search
+            </MenuItem>
+            <MenuItem selected={selected} href="/watchlist">
+              Watchlist
+            </MenuItem>
+            <MenuItem selected={selected} href="/history">
+              History
+            </MenuItem>
+            <MenuItem selected={selected} href="/toprated">
+              Top Rated
+            </MenuItem>
           </Stack>
 
           <Spacer />
@@ -77,7 +96,11 @@ function Header() {
           </Box>
 
           <Box display={[isOpen ? "block" : "none", , "block"]}>
-            <MenuItem href="/recommendations" variant="outline">
+            <MenuItem
+              selected={selected}
+              href="/recommendations"
+              variant="outline"
+            >
               Recommendations
             </MenuItem>
           </Box>
@@ -87,7 +110,7 @@ function Header() {
   );
 }
 
-export default function Layout({ title, children }) {
+export default function Layout({ selected, title, children }) {
   return (
     <>
       <Head>
@@ -96,13 +119,25 @@ export default function Layout({ title, children }) {
       </Head>
       <Grid minH="100vh">
         <VStack w="full" align="stretch" spacing={8}>
-          <Header />
+          <Header selected={selected} />
           <Box as="main" h="full">
             {children}
           </Box>
-          <Text fontSize="lg" align="end" p={3}>
-            &#169; Created by George Anton
-          </Text>
+          <Flex align="center" px={3}>
+            <Text fontSize="md">
+              This website uses the TMDB API but is not endorsed or certified by{" "}
+              <Link href="https://www.themoviedb.org/" isExternal>
+                <Image
+                  display="inline"
+                  src="images/logoTMDB.svg"
+                  width={8}
+                  alt="TMDB logo"
+                />
+              </Link>
+            </Text>
+            <Spacer />
+            <Text fontSize="md">&#169; Created by George Anton</Text>
+          </Flex>
         </VStack>
       </Grid>
     </>

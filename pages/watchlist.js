@@ -29,7 +29,7 @@ export default function Watchlist() {
   }
 
   return (
-    <Layout title="Watchlist">
+    <Layout title="Watchlist" selected="/watchlist">
       <Header title="Watchlist" />
       <Center>
         {data.length > 0 && (
