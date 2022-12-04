@@ -126,7 +126,7 @@ export default function Layout({ selected, title, children }) {
           <Flex align="center" px={3}>
             <Text fontSize="md">
               This website uses the TMDB API but is not endorsed or certified by{" "}
-              <Link href="https://www.themoviedb.org/" isExternal>
+              <Link href="https://www.themoviedb.org/">
                 <Image
                   display="inline"
                   src="/images/logoTMDB.svg"
