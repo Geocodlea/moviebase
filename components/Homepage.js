@@ -16,18 +16,9 @@ import {
 import { buildImageUrl } from "utils/api";
 
 export default function Homepage(props) {
-  let { data, error } = useSWR(`/api/${props.data}`);
+  let { data } = useSWR(`/api/${props.data}`);
   if (props.data === "recommendations") {
     data = data?.similarMovie.results;
-  }
-
-  if (error) {
-    return (
-      <Text color="red">Error fetching movies: {JSON.stringify(error)}</Text>
-    );
-  }
-  if (!data) {
-    return <Progress size="lg" isIndeterminate />;
   }
 
   return (
@@ -40,7 +31,7 @@ export default function Homepage(props) {
         columns={[1, 2, 3]}
         mx={[4, 6, 8, 10, 16]}
       >
-        {data.length > 0 ? (
+        {data?.length > 0 ? (
           data.slice(0, 3).map(({ id, title, overview, poster_path }) => (
             <Card align="center" key={id}>
               <CardBody>
@@ -69,7 +60,7 @@ export default function Homepage(props) {
           ))
         ) : (
           <Text m="auto" fontSize="xl">
-            Add some movies to your {props.data} page
+            Add some movies to your {props.text} page
           </Text>
         )}
       </SimpleGrid>

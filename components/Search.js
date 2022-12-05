@@ -37,7 +37,7 @@ export function SearchBar(props) {
   };
 
   return (
-    <Box mx={10}>
+    <Box mx={[0, 10, 20, 40, 60, 80]}>
       <InputGroup as="form">
         <Input
           placeholder="Search for a movie..."
@@ -106,7 +106,7 @@ export function SearchResults(props) {
 
   if (!terms) {
     return (
-      <Text mt={5} ml={10} fontSize="xl">
+      <Text ml={[0, 10, 20, 40, 60, 80]} fontSize="xl">
         Type some terms for a quick search
       </Text>
     );
@@ -133,7 +133,7 @@ export function SearchResults(props) {
       <Text m={5} fontSize="xl">
         You have the option to sort by Release Date, Rating or Votes.
       </Text>
-      <TableContainer w="90%">
+      <TableContainer w={["100%", , "95%", "90%", "80%", "60%"]}>
         <Table variant="striped" colorScheme="blue">
           <Thead>
             <Tr>

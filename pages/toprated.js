@@ -10,7 +10,6 @@ import {
   Th,
   Td,
   TableContainer,
-  Badge,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import useSWR from "swr";
@@ -37,7 +36,7 @@ export default function Recommendations() {
       </Text>
       <Center>
         {data.results && (
-          <TableContainer w="90%">
+          <TableContainer w={["100%", , "95%", "90%", "80%", "60%"]}>
             <Table variant="striped" colorScheme="blue">
               <Thead>
                 <Tr>

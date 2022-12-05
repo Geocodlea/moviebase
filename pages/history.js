@@ -10,6 +10,7 @@ import {
   Th,
   Td,
   TableContainer,
+  Badge,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import useSWR from "swr";
@@ -33,8 +34,8 @@ export default function History() {
     <Layout title="History" selected="/history">
       <Header title="History" />
       <Center>
-        {data.length > 0 && (
-          <TableContainer w="90%">
+        {data.length > 0 ? (
+          <TableContainer w={["100%", , "95%", "90%", "80%", "60%"]}>
             <Table variant="striped" colorScheme="blue">
               <Thead>
                 <Tr>
@@ -62,6 +63,12 @@ export default function History() {
               </Tbody>
             </Table>
           </TableContainer>
+        ) : (
+          <Text m="auto" fontSize="xl">
+            Add some movies to your History page. You can add movies by
+            searching for a movie and clicking the <Badge>Add to history</Badge>{" "}
+            Icon inside the movie page.
+          </Text>
         )}
       </Center>
       <HistoryForm />

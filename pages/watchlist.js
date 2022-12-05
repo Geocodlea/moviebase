@@ -10,6 +10,7 @@ import {
   Th,
   Td,
   TableContainer,
+  Badge,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import useSWR from "swr";
@@ -32,8 +33,8 @@ export default function Watchlist() {
     <Layout title="Watchlist" selected="/watchlist">
       <Header title="Watchlist" />
       <Center>
-        {data.length > 0 && (
-          <TableContainer w="90%">
+        {data.length > 0 ? (
+          <TableContainer w={["100%", , "95%", "90%", "80%", "60%"]}>
             <Table variant="striped" colorScheme="blue">
               <Thead>
                 <Tr>
@@ -57,6 +58,12 @@ export default function Watchlist() {
               </Tbody>
             </Table>
           </TableContainer>
+        ) : (
+          <Text m="auto" fontSize="xl">
+            Add some movies to your Watchlist page. You can add movies by
+            searching for a movie and clicking the{" "}
+            <Badge>Add to watchlist</Badge> button inside the movie page.
+          </Text>
         )}
       </Center>
     </Layout>
