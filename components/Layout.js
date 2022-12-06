@@ -23,6 +23,7 @@ const MenuItem = ({ selected, href, children, ...props }) => (
   <DarkMode>
     <Link href={href} passHref legacyBehavior>
       <Button
+        fontSize={["xs", "sm", "md", "lg", "xl"]}
         color={selected === href ? "gray" : "white"}
         as="a"
         variant="link"

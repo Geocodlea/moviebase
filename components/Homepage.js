@@ -21,6 +21,10 @@ export default function Homepage(props) {
     data = data?.similarMovie.results;
   }
 
+  if (!data) {
+    return <Progress size="lg" isIndeterminate />;
+  }
+
   return (
     <>
       <Heading as="h2" align="center" mt={10} mb={3}>
@@ -41,7 +45,7 @@ export default function Homepage(props) {
                   borderRadius="lg"
                   m="auto"
                   w="100%"
-                  h={[64, 60, 56, 64, 96]}
+                  h="auto"
                 />
                 <Stack mt="6" spacing="3">
                   <Heading size="md">{title}</Heading>
