@@ -16,6 +16,7 @@ import {
   DarkMode,
   Flex,
   Image,
+  Center,
 } from "@chakra-ui/react";
 import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
@@ -122,6 +123,11 @@ export default function Layout({ selected, title, children }) {
         <VStack w="full" align="stretch" spacing={8}>
           <Header selected={selected} />
           <Box as="main" h="full">
+            <Center>
+              <Heading as="h1" size="2xl" mb={10}>
+                {title}
+              </Heading>
+            </Center>
             {children}
           </Box>
           <Flex align="center" px={3}>

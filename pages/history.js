@@ -16,7 +16,6 @@ import Link from "next/link";
 import useSWR from "swr";
 import dateFormat from "utils/dateFormat";
 import HistoryForm from "components/HistoryForm";
-import Header from "components/Header";
 
 export default function History() {
   const { data, error } = useSWR(`/api/history`);
@@ -32,7 +31,6 @@ export default function History() {
 
   return (
     <Layout title="History" selected="/history">
-      <Header title="History" />
       <Center>
         {data.length > 0 ? (
           <TableContainer w={["100%", , "95%", "90%", "80%", "60%"]}>

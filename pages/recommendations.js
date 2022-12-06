@@ -15,7 +15,6 @@ import {
 import Link from "next/link";
 import useSWR from "swr";
 import dateFormat from "utils/dateFormat";
-import Header from "components/Header";
 
 const DataTable = ({ data }) => {
   return (
@@ -68,7 +67,6 @@ export default function Recommendations() {
 
   return (
     <Layout title="Recommendations" selected="/recommendations">
-      <Header title="Recommendations" />
       <Text m={5} align="center" fontSize="2xl">
         Recommendations from your Watchlist and History Movies
       </Text>

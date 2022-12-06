@@ -15,7 +15,6 @@ import {
 import Link from "next/link";
 import useSWR from "swr";
 import dateFormat from "utils/dateFormat";
-import Header from "components/Header";
 
 export default function Watchlist() {
   const { data, error } = useSWR(`/api/watchlist`);
@@ -31,7 +30,6 @@ export default function Watchlist() {
 
   return (
     <Layout title="Watchlist" selected="/watchlist">
-      <Header title="Watchlist" />
       <Center>
         {data.length > 0 ? (
           <TableContainer w={["100%", , "95%", "90%", "80%", "60%"]}>

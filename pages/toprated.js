@@ -14,7 +14,6 @@ import {
 import Link from "next/link";
 import useSWR from "swr";
 import dateFormat from "utils/dateFormat";
-import Header from "components/Header";
 
 export default function Recommendations() {
   const { data, error } = useSWR(`/api/toprated`);
@@ -30,7 +29,6 @@ export default function Recommendations() {
 
   return (
     <Layout title="Top Rated" selected="/toprated">
-      <Header title="Top Rated" />
       <Text m={5} align="center" fontSize="xl">
         Top Rated Movies with more than 10.000 votes
       </Text>
