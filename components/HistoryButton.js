@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import useSWR, { useSWRConfig } from "swr";
 import { fetcher } from "utils/api";
 
-export default function HistoryButton() {
-  const { id } = useRouter().query;
+export default function HistoryButton({ movieId }) {
+  const id = useRouter().query.id || movieId;
   const { data } = useSWR(`/api/history/${id}`);
   const { mutate } = useSWRConfig();
 
@@ -22,6 +22,8 @@ export default function HistoryButton() {
                 method: "DELETE",
               })
             );
+
+            mutate(`/api/watchlist`, () => fetcher(`/api/watchlist`));
           }
           mutate(`/api/history/${id}`, () =>
             fetcher(`/api/history/${id}`, {

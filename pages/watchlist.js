@@ -1,6 +1,5 @@
 import Layout from "components/Layout";
 import {
-  Center,
   Text,
   Progress,
   Table,
@@ -11,10 +10,12 @@ import {
   Td,
   TableContainer,
   Badge,
+  VStack,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import useSWR from "swr";
 import dateFormat from "utils/dateFormat";
+import HistoryButton from "components/HistoryButton";
 
 export default function Watchlist() {
   const { data, error } = useSWR(`/api/watchlist`);
@@ -30,15 +31,20 @@ export default function Watchlist() {
 
   return (
     <Layout title="Watchlist" selected="/watchlist">
-      <Center>
+      <VStack>
         {data.length > 0 ? (
           <TableContainer w={["100%", , "95%", "90%", "80%", "60%"]}>
+            <Text m={5} align="center" fontSize="xl">
+              You can press the <Badge>Add to history</Badge> Icon to move it
+              from Watchlist to History
+            </Text>
             <Table variant="striped" colorScheme="blue">
               <Thead>
                 <Tr>
                   <Th>No.</Th>
                   <Th>Title</Th>
                   <Th>Added</Th>
+                  <Th>History</Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -51,6 +57,9 @@ export default function Watchlist() {
                       </Link>
                     </Td>
                     <Td>{dateFormat(date)}</Td>
+                    <Td>
+                      <HistoryButton movieId={id} />
+                    </Td>
                   </Tr>
                 ))}
               </Tbody>
@@ -63,7 +72,7 @@ export default function Watchlist() {
             <Badge>Add to watchlist</Badge> button inside the movie page.
           </Text>
         )}
-      </Center>
+      </VStack>
     </Layout>
   );
 }
