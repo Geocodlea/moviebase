@@ -11,9 +11,9 @@ export default function Home() {
       </Heading>
       <SearchBar route="" />
       <SearchResults results="5" />
-      <Homepage data="watchlist" text="Watchlist" />
-      <Homepage data="history" text="History" />
-      <Homepage data="recommendations" text="Watchlist/History" />
+      <Homepage page="watchlist" text="Watchlist" />
+      <Homepage page="history" text="History" />
+      <Homepage page="recommendations" text="Watchlist/History" />
     </Layout>
   );
 }

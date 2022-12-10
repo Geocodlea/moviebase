@@ -53,7 +53,7 @@ const DataTable = ({ data }) => {
   );
 };
 
-export default function Recommendations() {
+const RecommendationsPage = () => {
   const { data, error } = useSWR(`/api/recommendations`);
 
   if (error) {
@@ -65,8 +65,18 @@ export default function Recommendations() {
     return <Progress size="lg" isIndeterminate />;
   }
 
+  if (!data.similarMovie.results) {
+    return (
+      <Text m={10} fontSize="xl">
+        Add some movies to your Watchlist or History page. You can add movies by
+        searching for a movie and clicking the <Badge>Add to watchlist</Badge>{" "}
+        or <Badge>Add to history</Badge> button inside the movie page.
+      </Text>
+    );
+  }
+
   return (
-    <Layout title="Recommendations" selected="/recommendations">
+    <>
       <Text m={5} align="center" fontSize="2xl">
         Recommendations from your Watchlist and History Movies
       </Text>
@@ -85,6 +95,14 @@ export default function Recommendations() {
         </Badge>
       </Text>
       <DataTable data={data.similarMovie} />
+    </>
+  );
+};
+
+export default function Recommendations() {
+  return (
+    <Layout title="Recommendations" selected="/recommendations">
+      <RecommendationsPage />
     </Layout>
   );
 }
