@@ -1,5 +1,5 @@
-import Head from 'next/head';
-import Link from 'next/link';
+import Head from "next/head";
+import Link from "next/link";
 import {
   Box,
   Heading,
@@ -11,36 +11,54 @@ import {
   Spacer,
   VStack,
   Grid,
-} from '@chakra-ui/react';
-import { HamburgerIcon } from '@chakra-ui/icons';
+  Text,
+  useColorMode,
+  DarkMode,
+  Flex,
+  Image,
+  Center,
+} from "@chakra-ui/react";
+import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
-const MenuItem = ({ href, children, ...props }) => (
-  <Link href={href} passHref legacyBehavior>
-    <Button as="a" variant="link" {...props}>
-      {children}
-    </Button>
-  </Link>
+const MenuItem = ({ selected, href, children, ...props }) => (
+  <DarkMode>
+    <Link href={href} passHref legacyBehavior>
+      <Button
+        fontSize={["xs", "sm", "md", "lg", "xl"]}
+        color={selected === href ? "gray" : "white"}
+        as="a"
+        variant="link"
+        {...props}
+      >
+        {children}
+      </Button>
+    </Link>
+  </DarkMode>
 );
 
-function Header() {
+function Header({ selected }) {
   const { isOpen, onToggle } = useDisclosure();
 
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
-    <Box bg="purple.500">
+    <Box bgGradient="linear(to-t, blue.600, blue.800)">
       <Container>
         <Stack
           as="nav"
-          direction={['column', , 'row']}
+          direction={["column", , "row"]}
           justify="space-between"
           wrap="wrap"
           py="1.5rem"
         >
           <HStack justify="space-between">
             <MenuItem href="/" mr={8}>
-              <Heading size="lg">Moviebase</Heading>
+              <Heading size="lg">
+                <img src="/images/logo.svg" width="60" />
+              </Heading>
             </MenuItem>
 
-            <Box display={['block', , 'none']} onClick={onToggle}>
+            <Box display={["block", , "none"]} onClick={onToggle}>
               <Button variant="outline">
                 <HamburgerIcon />
               </Button>
@@ -48,26 +66,44 @@ function Header() {
           </HStack>
 
           <Stack
-            direction={['column', , 'row']}
+            direction={["column", , "row"]}
             justify="start"
-            align={['start', , 'center']}
-            display={[isOpen ? 'flex' : 'none', , 'flex']}
+            align={["start", , "center"]}
+            display={[isOpen ? "flex" : "none", , "flex"]}
             spacing={4}
           >
-            <MenuItem href="/search">Search</MenuItem>
-            <MenuItem href="/" disabled>
+            <MenuItem selected={selected} href="/">
+              Home
+            </MenuItem>
+            <MenuItem selected={selected} href="/search">
+              Search
+            </MenuItem>
+            <MenuItem selected={selected} href="/watchlist">
               Watchlist
             </MenuItem>
-            <MenuItem href="/" disabled>
+            <MenuItem selected={selected} href="/history">
               History
+            </MenuItem>
+            <MenuItem selected={selected} href="/toprated">
+              Top Rated
             </MenuItem>
           </Stack>
 
           <Spacer />
 
-          <Box display={[isOpen ? 'block' : 'none', , 'block']}>
-            <MenuItem href="/" variant="outline" disabled>
-              What to watch
+          <Box display={[isOpen ? "block" : "none", , "block"]}>
+            <Button onClick={toggleColorMode}>
+              {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+            </Button>
+          </Box>
+
+          <Box display={[isOpen ? "block" : "none", , "block"]}>
+            <MenuItem
+              selected={selected}
+              href="/recommendations"
+              variant="outline"
+            >
+              Recommendations
             </MenuItem>
           </Box>
         </Stack>
@@ -76,7 +112,7 @@ function Header() {
   );
 }
 
-export default function Layout({ title, children }) {
+export default function Layout({ selected, title, children }) {
   return (
     <>
       <Head>
@@ -85,10 +121,30 @@ export default function Layout({ title, children }) {
       </Head>
       <Grid minH="100vh">
         <VStack w="full" align="stretch" spacing={8}>
-          <Header />
+          <Header selected={selected} />
           <Box as="main" h="full">
+            <Center>
+              <Heading as="h1" size="2xl" mb={10}>
+                {title}
+              </Heading>
+            </Center>
             {children}
           </Box>
+          <Flex align="center" px={3}>
+            <Text fontSize="md">
+              This website uses the TMDB API but is not endorsed or certified by{" "}
+              <Link href="https://www.themoviedb.org/">
+                <Image
+                  display="inline"
+                  src="/images/logoTMDB.svg"
+                  width={8}
+                  alt="TMDB logo"
+                />
+              </Link>
+            </Text>
+            <Spacer />
+            <Text fontSize="md">&#169; Created by George Anton</Text>
+          </Flex>
         </VStack>
       </Grid>
     </>
