@@ -19,3 +19,5 @@
 > How to make request to TMDB API
 
 > How to style it using Chakra UI
+
+### You can check the online example: [here](https://moviebase-kappa.vercel.app/)
