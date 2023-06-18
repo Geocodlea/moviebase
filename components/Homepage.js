@@ -38,7 +38,7 @@ const Home = ({ page, text }) => {
     <SimpleGrid
       spacing={[4, 6, 8, 10, 16]}
       columns={[1, 2, 3]}
-      mx={[4, 6, 8, 10, 16]}
+      px={[0, 6, 8, 10, 16]}
     >
       {data.slice(0, 3).map(({ id, title, overview, poster_path }) => (
         <Card align="center" key={id}>
