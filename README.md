@@ -12,7 +12,7 @@
 
 ### Things learned making this project
 
-> How to create a server and all routes necesary using ExpressJS
+> How to use React with Next.js framework
 
 > How to create, read, update and delete from a database using MongoDb and Mongoose
 
